@@ -5,7 +5,7 @@ services:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver
     environment:
-      SA_PASSWORD: "123@ABCD"
+      SA_PASSWORD: ""
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
@@ -20,10 +20,9 @@ services:
     depends_on:
       - sqlserver
     environment:
-      ConnectionStrings__DefaultConnectionString: "Server=sqlserver,1433;Database=monajat;User Id=sa;Password=123@ABCD;Encrypt=False;"
+      ConnectionStrings__DefaultConnectionString: ""
     ports:
-      - "80:8080"
-      - "443:443"
+
 
 volumes:
   sqlserverdata:
