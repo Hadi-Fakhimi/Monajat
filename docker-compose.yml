@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "123@ABCD"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+
+  api:
+    build:
+      context: .
+      dockerfile: Monajat.Presentation/Dockerfile
+    container_name: api
+    depends_on:
+      - sqlserver
+    environment:
+      ConnectionStrings__DefaultConnectionString: "Server=sqlserver,1433;Database=monajat;User Id=sa;Password=123@ABCD;Encrypt=False;"
+    ports:
+      - "80:8080"
+      - "443:443"
+
+volumes:
+  sqlserverdata:

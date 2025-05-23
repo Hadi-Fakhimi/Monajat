@@ -1,0 +1,6 @@
+@Monajat.Presentation_HostAddress = http://localhost:5289
+
+GET {{Monajat.Presentation_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
